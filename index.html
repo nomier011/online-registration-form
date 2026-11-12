@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <header class="form-header">
+            <h1>Student Registration</h1>
+            <p>Please complete all required fields. Fields marked <span class="req">*</span> are required.</p>
+        </header>
+
+        <form id="studentForm" novalidate>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="fullName">Full Name <span class="req">*</span></label>
+                    <input type="text" id="fullName" name="fullName" placeholder="e.g. Juan Dela Cruz" required>
+                    <div class="error-message" id="error-fullName"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentId">Student ID / LRN <span class="req">*</span></label>
+                    <input type="text" id="studentId" name="studentId" placeholder="e.g. 2025-12345" required>
+                    <div class="error-message" id="error-studentId"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="institutionalEmail">Institutional Email <span class="req">*</span></label>
+                    <input type="email" id="institutionalEmail" name="institutionalEmail" placeholder="name@university.edu" required>
+                    <div class="error-message" id="error-institutionalEmail"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="personalEmail">Personal Email <span class="req">*</span></label>
+                    <input type="email" id="personalEmail" name="personalEmail" placeholder="you@example.com" required>
+                    <div class="error-message" id="error-personalEmail"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile">Mobile Phone Number <span class="req">*</span></label>
+                    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{11}" placeholder="e.g. 09171234567" required>
+                    <div class="error-message" id="error-mobile"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="emergencyName">Emergency Contact Name <span class="req">*</span></label>
+                    <input type="text" id="emergencyName" name="emergencyName" placeholder="Full name of contact" required>
+                    <div class="error-message" id="error-emergencyName"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Portal Password <span class="req">*</span></label>
+                    <input type="password" id="password" name="password" placeholder="Min. 8 characters" required>
+                    <div class="error-message" id="error-password"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth <span class="req">*</span></label>
+                    <input type="date" id="dob" name="dob" required>
+                    <div class="error-message" id="error-dob"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="units">Units to Enroll <span class="req">*</span></label>
+                    <input type="number" id="units" name="units" min="3" max="24" placeholder="3 – 24" required>
+                    <div class="error-message" id="error-units"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gpa">GPA / GWA <span class="req">*</span></label>
+                    <input type="number" id="gpa" name="gpa" step="0.01" min="1.00" max="5.00" placeholder="e.g. 1.75" required>
+                    <div class="error-message" id="error-gpa"></div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Year Level <span class="req">*</span></label>
+                    <div class="inline-group">
+                        <label class="radio-option"><input type="radio" name="yearLevel" value="1st Year"> 1st Year</label>
+                        <label class="radio-option"><input type="radio" name="yearLevel" value="2nd Year"> 2nd Year</label>
+                        <label class="radio-option"><input type="radio" name="yearLevel" value="3rd Year"> 3rd Year</label>
+                        <label class="radio-option"><input type="radio" name="yearLevel" value="4th Year"> 4th Year</label>
+                    </div>
+                    <div class="error-message" id="error-yearLevel"></div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Enrollment Status <span class="req">*</span></label>
+                    <div class="inline-group">
+                        <label class="radio-option"><input type="radio" name="enrollStatus" value="Regular"> Regular</label>
+                        <label class="radio-option"><input type="radio" name="enrollStatus" value="Irregular"> Irregular</label>
+                    </div>
+                    <div class="error-message" id="error-enrollStatus"></div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Laboratory Courses <span class="hint">(select at least one)</span></label>
+                    <div class="checkbox-group">
+                        <label class="check-option"><input type="checkbox" name="labCourses" value="Physics Lab"> Physics Lab</label>
+                        <label class="check-option"><input type="checkbox" name="labCourses" value="Chemistry Lab"> Chemistry Lab</label>
+                        <label class="check-option"><input type="checkbox" name="labCourses" value="Biology Lab"> Biology Lab</label>
+                        <label class="check-option"><input type="checkbox" name="labCourses" value="Computer Lab"> Computer Lab</label>
+                    </div>
+                    <div class="error-message" id="error-labCourses"></div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label class="check-option terms">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms">
+                        I agree to the University Terms and Honor Code <span class="req">*</span>
+                    </label>
+                    <div class="error-message" id="error-agreeTerms"></div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="degreeProgram">Degree Program / Major <span class="req">*</span></label>
+                    <select id="degreeProgram" name="degreeProgram" required>
+                        <option value="">-- Select degree program --</option>
+                        <option value="BS Computer Science">BS Computer Science</option>
+                        <option value="BS Information Technology">BS Information Technology</option>
+                        <option value="BS Electrical Engineering">BS Electrical Engineering</option>
+                        <option value="BS Mechanical Engineering">BS Mechanical Engineering</option>
+                        <option value="BA Communication">BA Communication</option>
+                        <option value="BS Psychology">BS Psychology</option>
+                        <option value="BS Accountancy">BS Accountancy</option>
+                    </select>
+                    <div class="error-message" id="error-degreeProgram"></div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="proofFile">Proof of Grades or 2x2 Photo <span class="req">*</span></label>
+                    <input type="file" id="proofFile" name="proofFile" accept="image/png, image/jpeg, application/pdf" required>
+                    <p class="hint">Accepted: PNG, JPG, PDF · Max 5 MB</p>
+                    <div class="error-message" id="error-proofFile"></div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="extracurricular">Extracurricular Background / Scholarship Justification <span class="req">*</span></label>
+                    <textarea id="extracurricular" name="extracurricular" rows="4" placeholder="Describe your activities, leadership roles, or scholarship justification (min. 20 characters)" required></textarea>
+                    <div class="error-message" id="error-extracurricular"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">Register Student</button>
+            <div id="successMessage" class="success-feedback">✅ Registration successful! All validations passed.</div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
