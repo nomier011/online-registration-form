@@ -43,10 +43,12 @@
     const errProofFile = document.getElementById('error-proofFile');
     const errExtracurricular = document.getElementById('error-extracurricular');
 
-    // Allowed MIME types for the file upload
+    // Allowed MIME types & extensions for the file upload
     const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'application/pdf'];
     const ALLOWED_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.pdf'];
-    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+
+    // ✅ File size limit changed to 2 MB
+    const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB
 
     // ----- SET DATE CONSTRAINTS (MIN / MAX) -----
     function setDateConstraints() {
@@ -234,7 +236,7 @@
             isValid = false;
         }
 
-        // 16. File Upload (proof of grades / 2x2 photo)
+        // 16. File Upload — must be valid type AND ≤ 2 MB
         if (!proofFile.files || proofFile.files.length === 0) {
             setError(proofFile, 'Please upload proof of grades or a 2x2 photo.', errProofFile);
             isValid = false;
@@ -248,12 +250,12 @@
                 setError(proofFile, 'Only PNG, JPEG, or PDF files are allowed.', errProofFile);
                 isValid = false;
             } else if (file.size > MAX_FILE_SIZE) {
-                setError(proofFile, 'File size must not exceed 5 MB.', errProofFile);
+                setError(proofFile, 'File size must not exceed 2 MB.', errProofFile);
                 isValid = false;
             }
         }
 
-        // 17. Extracurricular background / scholarship justification (textarea)
+        // 17. Extracurricular background / scholarship justification
         const extraVal = extracurricular.value.trim();
         if (!extraVal) {
             setError(extracurricular, 'This field is required.', errExtracurricular);
@@ -284,21 +286,18 @@
             });
         };
 
-        // Full Name
         validateField(fullName, errFullName, (val) => {
             if (!val.trim()) return 'Full name is required.';
             if (val.trim().length < 2) return 'Name must be at least 2 characters.';
             return '';
         });
 
-        // Student ID
         validateField(studentId, errStudentId, (val) => {
             if (!val.trim()) return 'Student ID / LRN is required.';
             if (val.trim().length < 4) return 'ID must be at least 4 characters.';
             return '';
         });
 
-        // Emails
         const emailCheck = (val) => {
             if (!val.trim()) return 'Email is required.';
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim())) return 'Enter a valid email address.';
@@ -307,28 +306,24 @@
         validateField(institutionalEmail, errInstEmail, emailCheck);
         validateField(personalEmail, errPersonalEmail, emailCheck);
 
-        // Mobile
         validateField(mobile, errMobile, (val) => {
             if (!val.trim()) return 'Mobile number is required.';
             if (!/^[0-9]{11}$/.test(val.trim())) return 'Must be exactly 11 digits.';
             return '';
         });
 
-        // Emergency Contact
         validateField(emergencyName, errEmergency, (val) => {
             if (!val.trim()) return 'Emergency contact name is required.';
             if (val.trim().length < 2) return 'Contact name too short.';
             return '';
         });
 
-        // Password
         validateField(password, errPassword, (val) => {
             if (!val) return 'Password is required.';
             if (val.length < 8) return 'Password must be at least 8 characters.';
             return '';
         });
 
-        // Date of Birth
         dob.addEventListener('blur', function() {
             errDob.textContent = '';
             dob.classList.remove('error');
@@ -351,7 +346,6 @@
             }
         });
 
-        // Units
         validateField(units, errUnits, (val) => {
             if (!val.trim()) return 'Units required.';
             const n = Number(val);
@@ -360,7 +354,6 @@
             return '';
         });
 
-        // GPA
         validateField(gpa, errGpa, (val) => {
             if (!val.trim()) return 'GPA / GWA is required.';
             const n = Number(val);
@@ -369,7 +362,6 @@
             return '';
         });
 
-        // Degree select
         degreeSelect.addEventListener('change', function() {
             if (degreeSelect.value) {
                 degreeSelect.classList.remove('error');
@@ -377,7 +369,6 @@
             }
         });
 
-        // Year / Status radios
         yearRadios.forEach(r => r.addEventListener('change', function() {
             if (this.checked) errYear.textContent = '';
         }));
@@ -385,14 +376,12 @@
             if (this.checked) errStatus.textContent = '';
         }));
 
-        // Lab checkboxes
         labCheckboxes.forEach(cb => cb.addEventListener('change', function() {
             let anyChecked = false;
             labCheckboxes.forEach(c => { if (c.checked) anyChecked = true; });
             if (anyChecked) errLab.textContent = '';
         }));
 
-        // Agree terms
         agreeTerms.addEventListener('change', function() {
             if (this.checked) {
                 errAgree.textContent = '';
@@ -400,7 +389,7 @@
             }
         });
 
-        // File upload — validate on change (immediately after selection)
+        // File upload — validated immediately when a file is chosen
         proofFile.addEventListener('change', function() {
             errProofFile.textContent = '';
             proofFile.classList.remove('error');
@@ -420,12 +409,12 @@
                 errProofFile.textContent = 'Only PNG, JPEG, or PDF files are allowed.';
                 proofFile.classList.add('error');
             } else if (file.size > MAX_FILE_SIZE) {
-                errProofFile.textContent = 'File size must not exceed 5 MB.';
+                // ✅ 2 MB message
+                errProofFile.textContent = 'File size must not exceed 2 MB.';
                 proofFile.classList.add('error');
             }
         });
 
-        // Extracurricular textarea — live validation on blur
         extracurricular.addEventListener('blur', function() {
             const val = extracurricular.value.trim();
             errExtracurricular.textContent = '';
@@ -464,12 +453,10 @@
         }
     });
 
-    // Hide success message on any edit
     form.addEventListener('input', function() {
         successDiv.classList.remove('show');
     });
 
-    // Clear error state on input for text/select/textarea fields
     form.querySelectorAll('input, select, textarea').forEach(input => {
         input.addEventListener('input', function() {
             this.classList.remove('error');
